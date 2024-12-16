@@ -2,6 +2,7 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { AuthService } from 'src/auth/providers/auth.service';
+import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 
 @Injectable()
 export class UsersService {
@@ -16,9 +17,14 @@ export class UsersService {
   /**
    * find all
    */
-  public findAll() {
+  public findAll(
+    getUsersParamDto: GetUsersParamDto,
+    limit: number,
+    page: number,
+  ) {
     const isAuth = this.authService.isAuth();
     console.log(isAuth);
+    console.log(getUsersParamDto, limit, page);
 
     return [
       { id: 1, name: 'John Doe' },

@@ -14,6 +14,6 @@ export class PostService {
   }
 
   public findOneById(id: number) {
-    return `get post with id ${id}`;
+    return this.usersService.findOneById(id);
   }
 }
