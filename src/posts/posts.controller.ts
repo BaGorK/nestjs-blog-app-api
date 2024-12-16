@@ -1,7 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PostService } from './providers/post.service';
+import { ApiTags } from '@nestjs/swagger';
+import { CreatePostDto } from './dtos/create-post.dto';
 
 @Controller('posts')
+@ApiTags('Posts')
 export class PostsController {
   constructor(
     /**
@@ -14,7 +17,15 @@ export class PostsController {
    * Get all posts
    */
   @Get()
-  public findAll() {
+  public findAllPosts() {
     return this.postsService.findAll();
+  }
+
+  /**
+   * Create Post
+   */
+  @Post()
+  public createPost(@Body() createPostDto: CreatePostDto) {
+    return createPostDto;
   }
 }
