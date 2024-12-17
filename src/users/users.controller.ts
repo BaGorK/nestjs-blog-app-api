@@ -36,16 +36,16 @@ export class UsersController {
     description: 'The number of entries returned per query',
     example: 20,
   })
-  @ApiResponse({
-    status: 200,
-    description: 'The list of users has been successfully returned',
-  })
   @ApiQuery({
     name: 'page',
     required: false,
     type: 'number',
     description: 'The position of the page number that the API should return',
     example: 1,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The list of users has been successfully returned',
   })
   public getUsers(
     @Param() getUsersParamDto: GetUsersParamDto,
