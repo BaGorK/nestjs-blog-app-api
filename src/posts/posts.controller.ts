@@ -34,6 +34,7 @@ export class PostsController {
     description: 'Data required to create a new post',
   })
   public createPost(@Body() createPostDto: CreatePostDto) {
+    console.log('createPostDto', createPostDto);
     return createPostDto;
   }
 }

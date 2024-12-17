@@ -1,5 +1,5 @@
 {{
-  exports.publishOn = new Date().to
+  exports.publishOn = new Date().toISOString();
 }}
 
 POST http://localhost:3000/posts HTTP/1.1
@@ -10,6 +10,16 @@ Content-Type: application/json
   "postType": "post",
   "slug": "new-with-nestjs",
   "status": "draft",
+  "content": "NestJS is a framework for building efficient, scalable Node.js server-side applications. It uses modern JavaScript, is built with TypeScript and combines elements of OOP (Object Oriented Programming), FP (Functional Programming), and FRP (Functional Reactive Programming).",
   "schema": "{\r\n \"@context\": \"https:\/\/schema.org\",\r\n \"@type\": \"Person\"\r\n }",
+  // "schema": "schema",
+  "featuredImageUrl": "https://nestjs.com/img/logo_text.svg",
   "publishOn": "{{publishOn}}",
+  "tags": ["nestjs", "nodejs", "typescript"],
+  "metaOptions": [
+      {
+        "key": "author",
+        "value": "John Doe"
+      }
+    ]
 }

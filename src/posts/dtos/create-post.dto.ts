@@ -15,23 +15,7 @@ import { PostStatus } from '../enums/postStatus.enum';
 import { PostType } from '../enums/postType.enum';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-
-export class CreatePostMetaOptionsDto {
-  @ApiProperty({
-    description: 'key of the meta option',
-    example: 'author',
-  })
-  @IsString()
-  @IsNotEmpty()
-  key: string;
-
-  @ApiProperty({
-    description: 'value of the meta option',
-    example: 'John Doe',
-  })
-  @IsNotEmpty()
-  value: any;
-}
+import { CreatePostMetaOptionsDto } from './create-post-meta-options.dto';
 
 export class CreatePostDto {
   @ApiProperty({
@@ -81,7 +65,8 @@ export class CreatePostDto {
 
   @ApiPropertyOptional({
     description: 'excerpt of the post',
-    example: 'This is the excerpt of the post',
+    example:
+      '{\r\n "@context": "https:\/\/schema.org",\r\n "@type": "Person"\r\n }',
   })
   @IsOptional()
   @IsJSON()
@@ -105,7 +90,7 @@ export class CreatePostDto {
 
   @ApiPropertyOptional({
     description: 'tags of the post',
-    example: ['nestjs', 'javascript', 'nodejs'],
+    example: ['nestjs', 'typescript', 'nodejs'],
   })
   @IsOptional()
   @IsArray()
