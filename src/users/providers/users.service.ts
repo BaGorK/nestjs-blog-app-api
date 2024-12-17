@@ -4,6 +4,9 @@ import { CreateUserDto } from '../dtos/create-user.dto';
 import { AuthService } from 'src/auth/providers/auth.service';
 import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 
+/**
+ * Users Service Provider
+ */
 @Injectable()
 export class UsersService {
   constructor(
@@ -42,14 +45,23 @@ export class UsersService {
     return id;
   }
 
+  /**
+   * create user
+   */
   public create(createUserDto: CreateUserDto) {
     return createUserDto;
   }
 
+  /**
+   * update user
+   */
   public update(id: number, updateUserDto: UpdateUserDto) {
     return updateUserDto;
   }
 
+  /**
+   * Delete user
+   */
   public remove(id: number) {
     return `User ${id} has been removed`;
   }
