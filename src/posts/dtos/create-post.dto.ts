@@ -40,6 +40,8 @@ export class CreatePostDto {
   slug: string;
 
   @ApiProperty({
+    enumName: 'PostType',
+    enum: PostType,
     description: 'type of the post',
     example: 'post',
   })
@@ -48,6 +50,8 @@ export class CreatePostDto {
   postType: PostType;
 
   @ApiProperty({
+    enumName: 'PostStatus',
+    enum: PostStatus,
     description: 'status of the post',
     example: 'draft',
   })
@@ -89,6 +93,7 @@ export class CreatePostDto {
   publishOn?: Date;
 
   @ApiPropertyOptional({
+    type: 'array',
     description: 'tags of the post',
     example: ['nestjs', 'typescript', 'nodejs'],
   })
@@ -99,17 +104,29 @@ export class CreatePostDto {
   tags?: string[];
 
   @ApiPropertyOptional({
+    type: 'array',
+    required: false,
     description: 'meta options of the post',
-    example: [
-      {
-        key: 'author',
-        value: 'John Doe',
+    items: {
+      type: 'object',
+      properties: {
+        key: {
+          type: 'string',
+          description:
+            'the key can be any string identifier for your metaOptions',
+          example: 'author',
+        },
+        value: {
+          type: 'any',
+          description: 'the value can be any data type',
+          example: 'John Doe',
+        },
       },
-    ],
+    },
   })
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreatePostMetaOptionsDto)
-  metaOptions: CreatePostMetaOptionsDto[];
+  metaOptions?: CreatePostMetaOptionsDto[];
 }
