@@ -18,7 +18,17 @@ async function bootstrap() {
   /**
    * swagger documentation
    */
-  const config = new DocumentBuilder().setVersion('1.0').build();
+  const config = new DocumentBuilder()
+    .setTitle('Learn NestJs By Building A Blog Api')
+    // write me a blog api description
+    .setDescription(
+      'Learn NestJs By Building A Blog Api: http://localhost:3000',
+    )
+    .setTermsOfService('http://swagger.io/terms/')
+    .setLicense('MIT License', 'http://swagger.io/license/')
+    .addServer('http://localhost:3000')
+    .setVersion('1.0')
+    .build();
   /**
    * Instantiate
    */
