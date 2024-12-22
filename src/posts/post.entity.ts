@@ -1,8 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { CreatePostMetaOptionsDto } from '../meta-options/dtos/create-post-meta-options.dto';
 import { PostStatus } from './enums/postStatus.enum';
 import { PostType } from './enums/postType.enum';
 
+@Entity()
 export class Post {
   @PrimaryGeneratedColumn()
   id: number;
