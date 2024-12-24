@@ -4,9 +4,33 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TagsModule } from './tags/tags.module';
+import { MetaOptionsModule } from './meta-options/meta-options.module';
 
 @Module({
-  imports: [UsersModule, PostsModule, AuthModule],
+  imports: [
+    UsersModule,
+    PostsModule,
+    AuthModule,
+    TypeOrmModule.forRootAsync({
+      imports: [],
+      inject: [],
+      useFactory: () => ({
+        type: 'postgres',
+        port: 5432,
+        username: 'postgres',
+        password: 'postgres',
+        host: 'localhost',
+        database: 'nestjs-blog-app-api',
+        autoLoadEntities: true,
+        synchronize: true,
+        // synchronize: process.env.NODE_ENV === 'development',
+      }),
+    }),
+    TagsModule,
+    MetaOptionsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

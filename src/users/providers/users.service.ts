@@ -3,6 +3,9 @@ import { UpdateUserDto } from '../dtos/update-user.dto';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { AuthService } from 'src/auth/providers/auth.service';
 import { GetUsersParamDto } from '../dtos/get-users-param.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from '../user.entity';
 
 /**
  * Users Service Provider
@@ -10,6 +13,12 @@ import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 @Injectable()
 export class UsersService {
   constructor(
+    /**
+     * Inject Users Repository
+     */
+    @InjectRepository(User)
+    private readonly usersRepository: Repository<User>,
+
     /**
      * Inject Auth Service
      */
@@ -20,7 +29,7 @@ export class UsersService {
   /**
    * find all
    */
-  public findAll(
+  public findAllUsers(
     getUsersParamDto: GetUsersParamDto,
     limit: number,
     page: number,
@@ -48,21 +57,33 @@ export class UsersService {
   /**
    * create user
    */
-  public create(createUserDto: CreateUserDto) {
-    return createUserDto;
+  public async createUser(createUserDto: CreateUserDto) {
+    const user = await this.usersRepository.findOne({
+      where: {
+        email: createUserDto.email,
+      },
+    });
+    if (user) {
+      // HANDLE EXCEPTION
+      console.log('user already exists');
+    }
+
+    const newUser = this.usersRepository.create(createUserDto);
+
+    return await this.usersRepository.save(newUser);
   }
 
   /**
    * update user
    */
-  public update(id: number, updateUserDto: UpdateUserDto) {
+  public updateUser(id: number, updateUserDto: UpdateUserDto) {
     return updateUserDto;
   }
 
   /**
    * Delete user
    */
-  public remove(id: number) {
+  public removeUser(id: number) {
     return `User ${id} has been removed`;
   }
 }
