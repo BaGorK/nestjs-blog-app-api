@@ -39,8 +39,7 @@ export class PostsController {
     description: 'The post has been successfully created',
   })
   public createPost(@Body() createPostDto: CreatePostDto) {
-    console.log('createPostDto', createPostDto);
-    return createPostDto;
+    return this.postsService.create(createPostDto);
   }
 
   @ApiOperation({
