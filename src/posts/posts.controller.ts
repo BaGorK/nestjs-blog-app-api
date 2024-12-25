@@ -1,6 +1,21 @@
-import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { PostService } from './providers/post.service';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { PatchPostDto } from './dtos/patch-post.dto';
 
@@ -39,10 +54,12 @@ export class PostsController {
     description: 'The post has been successfully created',
   })
   public createPost(@Body() createPostDto: CreatePostDto) {
-    console.log('createPostDto', createPostDto);
-    return createPostDto;
+    return this.postsService.create(createPostDto);
   }
 
+  /**
+   * Update Post
+   */
   @ApiOperation({
     summary: 'Update a post',
     description: "This endpoint allows you to update a post's information",
@@ -58,5 +75,26 @@ export class PostsController {
   @Patch(':id')
   public updatePost(@Body() patchPostDto: PatchPostDto) {
     return patchPostDto;
+  }
+
+  /**
+   * Delete Post
+   */
+  @ApiOperation({
+    summary: 'Delete a post',
+    description: 'This endpoint allows you to delete a post',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Post ID',
+    type: 'number',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The post has been successfully deleted',
+  })
+  @Delete(':id')
+  public deletePost(@Param('id', ParseIntPipe) id: number) {
+    return this.postsService.delete(id);
   }
 }

@@ -1,8 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
-import { CreatePostMetaOptionsDto } from '../meta-options/dtos/create-post-meta-options.dto';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { PostStatus } from './enums/postStatus.enum';
 import { PostType } from './enums/postType.enum';
+import { MetaOption } from 'src/meta-options/meta-option.entity';
 
+@Entity()
 export class Post {
   @PrimaryGeneratedColumn()
   id: number;
@@ -64,5 +65,10 @@ export class Post {
   publishOn?: Date;
 
   tags?: string[];
-  metaOptions?: CreatePostMetaOptionsDto[];
+
+  @OneToOne(() => MetaOption, (metaOption) => metaOption.post, {
+    cascade: true,
+    eager: true,
+  })
+  metaOptions?: MetaOption;
 }

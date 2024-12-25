@@ -1,0 +1,6 @@
+POST http://localhost:3000/meta-options HTTP/1.1
+Content-Type: application/json
+
+{
+  "metaValue": "{\r\n \"@context\": \"https:\/\/schema.org\",\r\n \"@type\": \"Person\"\r\n }"
+}
