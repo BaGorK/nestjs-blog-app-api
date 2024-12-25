@@ -42,6 +42,9 @@ export class PostsController {
     return this.postsService.create(createPostDto);
   }
 
+  /**
+   * Update Post
+   */
   @ApiOperation({
     summary: 'Update a post',
     description: "This endpoint allows you to update a post's information",

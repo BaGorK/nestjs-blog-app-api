@@ -32,8 +32,12 @@ export class PostService {
   /**
    * Get all posts
    */
-  public findAll() {
-    return 'get all posts';
+  public async findAll() {
+    return await this.postsRepository.find({
+      relations: {
+        metaOptions: true,
+      },
+    });
   }
 
   /**
