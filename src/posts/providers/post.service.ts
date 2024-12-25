@@ -46,4 +46,13 @@ export class PostService {
   public findOneById(id: number) {
     return this.usersService.findOneById(id);
   }
+
+  /**
+   * Delete Post by id
+   */
+  public async delete(id: number) {
+    // NOTE:  ON DELETING A POST, ALL RELATED META OPTIONS WILL BE DELETED
+    await this.postsRepository.delete(id);
+    return { status: 'success', message: 'Post deleted successfully' };
+  }
 }
