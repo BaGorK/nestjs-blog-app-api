@@ -76,4 +76,25 @@ export class TagsController {
   public delete(@Param('id', ParseIntPipe) id: number) {
     return this.tagsService.delete(id);
   }
+
+  /**
+   * Soft delete
+   */
+  @ApiOperation({
+    summary: 'Soft delete a tag',
+    description: 'This endpoint allows you to soft delete a tag',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The tag has been successfully soft deleted',
+  })
+  @ApiParam({
+    name: 'id',
+    type: 'number',
+    description: 'Tag identifier',
+  })
+  @Delete('soft-delete/:id')
+  public async softDelete(@Param('id', ParseIntPipe) id: number) {
+    return this.tagsService.softDelete(id);
+  }
 }
