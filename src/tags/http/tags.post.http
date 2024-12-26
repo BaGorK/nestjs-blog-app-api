@@ -1,0 +1,8 @@
+POST http://localhost:3000/tags HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "javascript",
+  "slug": "javascript",
+  "description": "JavaScript is a programming language that conforms to the ECMAScript specification."
+}

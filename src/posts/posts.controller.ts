@@ -74,7 +74,7 @@ export class PostsController {
   })
   @Patch(':id')
   public updatePost(@Body() patchPostDto: PatchPostDto) {
-    return patchPostDto;
+    return this.postsService.update(patchPostDto);
   }
 
   /**
