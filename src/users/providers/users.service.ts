@@ -50,8 +50,8 @@ export class UsersService {
    * @param id
    * @returns
    */
-  public findOneById(id: number) {
-    return id;
+  public async findOneById(id: number) {
+    return await this.usersRepository.findOneBy({ id });
   }
 
   /**

@@ -18,5 +18,6 @@ Content-Type: application/json
   "tags": ["nestjs", "nodejs", "typescript"],
   "metaOptions": {
     "metaValue": "{\"key\": \"author 1\", \"value\": \"John Doe 1\"}"
-  }
+  },
+  "authorId": 2
 }
