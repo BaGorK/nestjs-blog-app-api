@@ -6,6 +6,8 @@ import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../user.entity';
+import profileConfig from '../config/profile.config';
+import { ConfigType } from '@nestjs/config';
 
 /**
  * Users Service Provider
@@ -24,6 +26,12 @@ export class UsersService {
      */
     @Inject(forwardRef(() => AuthService))
     private readonly authService: AuthService,
+
+    /**
+     * Inject module specific config files
+     */
+    @Inject(profileConfig.KEY)
+    private readonly profileConfiguration: ConfigType<typeof profileConfig>,
   ) {}
 
   /**
@@ -34,6 +42,8 @@ export class UsersService {
     limit: number,
     page: number,
   ) {
+    // test module specific config file
+    console.log('test module specific config file', this.profileConfiguration);
     const isAuth = this.authService.isAuth();
     console.log(isAuth);
     console.log(getUsersParamDto, limit, page);
