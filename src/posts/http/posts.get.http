@@ -6,6 +6,6 @@
 
 GET http://localhost:3000/posts
     ?page=1
-    &limit=2
+    &limit=1
     &startDate={{startDate}}
     &endDate={{endDate}}
