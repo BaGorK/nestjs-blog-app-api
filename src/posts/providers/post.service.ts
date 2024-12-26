@@ -55,6 +55,7 @@ export class PostService {
       relations: {
         metaOptions: true,
         author: true,
+        tags: true,
       },
     });
   }
