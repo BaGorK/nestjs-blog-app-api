@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { TagsService } from './providers/tags.service';
 import { CreateTagDto } from './dtos/create-tag.dto';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @Controller('tags')
 export class TagsController {
@@ -46,5 +54,26 @@ export class TagsController {
   @Get()
   public findAll() {
     return this.tagsService.findAll();
+  }
+
+  /**
+   * Delete a tag
+   */
+  @ApiOperation({
+    summary: 'Delete a tag',
+    description: 'This endpoint allows you to delete a tag',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The tag has been successfully deleted',
+  })
+  @ApiParam({
+    name: 'id',
+    type: 'number',
+    description: 'Tag identifier',
+  })
+  @Delete(':id')
+  public delete(@Param('id', ParseIntPipe) id: number) {
+    return this.tagsService.delete(id);
   }
 }
