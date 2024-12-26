@@ -67,7 +67,25 @@ export class UsersService {
    * @returns
    */
   public async findOneById(id: number) {
-    return await this.usersRepository.findOneBy({ id });
+    let user = undefined;
+
+    try {
+      user = await this.usersRepository.findOneBy({ id });
+    } catch (error) {
+      console.log('find by id service', error);
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment please try later',
+        {
+          description: 'Database Error',
+        },
+      );
+    }
+
+    if (!user) {
+      throw new BadRequestException('The user id does not exist');
+    }
+
+    return user;
   }
 
   /**
@@ -98,9 +116,21 @@ export class UsersService {
       );
     }
 
-    const newUser = this.usersRepository.create(createUserDto);
+    let newUser = this.usersRepository.create(createUserDto);
 
-    return await this.usersRepository.save(newUser);
+    try {
+      newUser = await this.usersRepository.save(newUser);
+    } catch (error) {
+      console.log('create user service', error);
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment please try later',
+        {
+          description: 'Database Error',
+        },
+      );
+    }
+
+    return newUser;
   }
 
   /**
