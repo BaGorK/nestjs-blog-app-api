@@ -1,8 +1,10 @@
+import { Post } from 'src/posts/post.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -46,6 +48,9 @@ export class Tag {
     nullable: true,
   })
   featuredImageUrl?: string;
+
+  @ManyToMany(() => Post, (post) => post.tags)
+  posts: Post[];
 
   // https://orkhan.gitbook.io/typeorm
   @CreateDateColumn()
