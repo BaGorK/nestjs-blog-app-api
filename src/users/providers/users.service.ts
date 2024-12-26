@@ -14,6 +14,8 @@ import { Repository } from 'typeorm';
 import { User } from '../user.entity';
 import profileConfig from '../config/profile.config';
 import { ConfigType } from '@nestjs/config';
+import { UsersCreateManyProviderService } from './users-create-many.provider.service';
+import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 
 /**
  * Users Service Provider
@@ -38,6 +40,11 @@ export class UsersService {
      */
     @Inject(profileConfig.KEY)
     private readonly profileConfiguration: ConfigType<typeof profileConfig>,
+
+    /**
+     * Inject UsersCreateManyProvider
+     */
+    private readonly usersCreateManyProvider: UsersCreateManyProviderService,
   ) {}
 
   /**
@@ -145,5 +152,12 @@ export class UsersService {
    */
   public removeUser(id: number) {
     return `User ${id} has been removed`;
+  }
+
+  /**
+   * Create Many users
+   */
+  public async createMany(createManyUsersDto: CreateManyUsersDto) {
+    return this.usersCreateManyProvider.createMany(createManyUsersDto);
   }
 }

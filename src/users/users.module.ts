@@ -5,11 +5,12 @@ import { AuthModule } from 'src/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { UsersCreateManyProviderService } from './providers/users-create-many.provider.service';
 import profileConfig from './config/profile.config';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, UsersCreateManyProviderService],
   exports: [UsersService],
   // when we have a circular dependency, we can use forwardRef to resolve it
   imports: [

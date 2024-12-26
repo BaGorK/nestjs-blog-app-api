@@ -13,8 +13,16 @@ import {
 import { UsersService } from './providers/users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
+import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 
 @Controller('users')
 @ApiTags('Users')
@@ -55,9 +63,44 @@ export class UsersController {
     return this.usersService.findAllUsers(getUsersParamDto, limit, page);
   }
 
+  /**
+   * create a user
+   */
+  @ApiOperation({
+    summary: 'Create a user',
+    description: 'This endpoint creates a new user',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'The user has been successfully created',
+  })
+  @ApiBody({
+    type: CreateUserDto,
+    description: 'The user data to be created',
+  })
   @Post()
   public createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
+  }
+
+  /**
+   * Create Many Users
+   */
+  @ApiOperation({
+    summary: 'Create many users',
+    description: 'This endpoint creates many users',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'The users have been successfully created',
+  })
+  @ApiBody({
+    type: CreateManyUsersDto,
+    description: 'The list of users to be created',
+  })
+  @Post('create-many')
+  public createManyUsers(@Body() createManyUsersDto: CreateManyUsersDto) {
+    return this.usersService.createMany(createManyUsersDto);
   }
 
   // @Get(':id')
@@ -65,6 +108,22 @@ export class UsersController {
   //   return this.usersService.findOneById(getUsersParamDto.id);
   // }
 
+  /**
+   * update a user by id
+   */
+  @ApiOperation({
+    summary: 'Get a user by id',
+    description: 'This endpoint returns a user by id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The user has been successfully returned',
+  })
+  @ApiParam({
+    name: 'id',
+    type: 'number',
+    description: 'The user id',
+  })
   @Patch(':id')
   public updateUser(
     @Param('id', ParseIntPipe) id: number,
@@ -73,6 +132,22 @@ export class UsersController {
     return this.usersService.updateUser(id, updateUserDto);
   }
 
+  /**
+   * Delete User By Id
+   */
+  @ApiOperation({
+    summary: 'Delete a user by id',
+    description: 'This endpoint deletes a user by id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The user has been successfully deleted',
+  })
+  @ApiParam({
+    name: 'id',
+    type: 'number',
+    description: 'The user id',
+  })
   @Delete(':id')
   public deleteUser(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.removeUser(id);
