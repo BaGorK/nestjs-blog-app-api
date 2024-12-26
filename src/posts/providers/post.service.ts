@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  RequestTimeoutException,
+} from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { Post } from '../post.entity';
@@ -81,12 +85,41 @@ export class PostService {
    * Update Post by id
    */
   public async update(patchPostDto: PatchPostDto) {
+    let tags = undefined;
+    let post = undefined;
     // find tags
-    const tags = await this.tagsService.findMultipleByIds(patchPostDto.tags);
+    try {
+      tags = await this.tagsService.findMultipleByIds(patchPostDto.tags);
+    } catch (error) {
+      console.log('error update on post service', error);
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment please try later',
+      );
+    }
+    /**
+     * number of need to be equal to the number of tag ids
+     */
+    if (!tags || !tags.length || tags.length !== patchPostDto.tags.length) {
+      throw new BadRequestException(
+        'Please check your tag Ids and ensure they are correct',
+      );
+    }
     // find the post by id
-    const post = await this.postsRepository.findOneBy({
-      id: patchPostDto.id,
-    });
+    try {
+      post = await this.postsRepository.findOneBy({
+        id: patchPostDto.id,
+      });
+    } catch (error) {
+      console.log('error update on post service', error);
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment please try later',
+      );
+    }
+
+    if (!post) {
+      throw new BadRequestException('The post with the post id does not exist');
+    }
+
     // update the post
     post.title = patchPostDto.title ?? post.title;
     post.slug = patchPostDto.slug ?? post.slug;
@@ -102,6 +135,15 @@ export class PostService {
     post.tags = tags;
 
     // save and return the updated post
-    return await this.postsRepository.save(post);
+    try {
+      post = await this.postsRepository.save(post);
+    } catch (error) {
+      console.log('error update on post service', error);
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment please try later',
+      );
+    }
+
+    return post;
   }
 }
