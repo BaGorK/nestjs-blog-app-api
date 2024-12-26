@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { TagsService } from './providers/tags.service';
 import { CreateTagDto } from './dtos/create-tag.dto';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -30,5 +30,21 @@ export class TagsController {
   @Post()
   public create(@Body() createTagDto: CreateTagDto) {
     return this.tagsService.create(createTagDto);
+  }
+
+  /**
+   * Find all tags
+   */
+  @ApiOperation({
+    summary: 'Find all tags',
+    description: 'This endpoint allows you to find all tags',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Return all tags',
+  })
+  @Get()
+  public findAll() {
+    return this.tagsService.findAll();
   }
 }
