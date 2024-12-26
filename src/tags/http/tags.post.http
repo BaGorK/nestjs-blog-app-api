@@ -2,7 +2,7 @@ POST http://localhost:3000/tags HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "nestjs",
-  "slug": "nestjs",
-  "description": "NestJS is a framework for building efficient, scalable Node.js server-side applications. It uses modern JavaScript, is built with TypeScript and combines elements of OOP (Object Oriented Programming), FP (Functional Programming), and FRP (Functional Reactive Programming)."
+  "name": "typescript",
+  "slug": "typescript",
+  "description": "TypeScript is a programming language developed and maintained by Microsoft."
 }
