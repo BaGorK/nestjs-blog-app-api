@@ -12,7 +12,12 @@ import profileConfig from './config/profile.config';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, UsersCreateManyProviderService, CreateUserProvider, FindOneUserByEmailProvider],
+  providers: [
+    UsersService,
+    UsersCreateManyProviderService,
+    CreateUserProvider,
+    FindOneUserByEmailProvider,
+  ],
   exports: [UsersService],
   // when we have a circular dependency, we can use forwardRef to resolve it
   imports: [
