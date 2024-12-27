@@ -50,8 +50,8 @@ export class AccessTokenGuard implements CanActivate {
     return true;
   }
 
-  private extractRequestTokenFromHeader(request: Request) {
-    const [, token] = request.headers.authorization?.split(' ') || [];
+  private extractRequestTokenFromHeader(request: Request): string | undefined {
+    const [, token] = request.headers.authorization?.split(' ') ?? [];
 
     return token;
   }
