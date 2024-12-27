@@ -79,7 +79,10 @@ export class SignInProvider {
       status: 'success',
       message: 'User signin successful',
       accessToken,
-      user,
+      user: {
+        ...user,
+        password: undefined,
+      },
     };
   }
 }
