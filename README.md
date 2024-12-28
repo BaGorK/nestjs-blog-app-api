@@ -22,12 +22,12 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/54e3ce9e-f867-4383-b361-4eb8ee6e1665" />
 </p>
 
+## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
