@@ -9,6 +9,7 @@ import {
   Patch,
   Query,
   DefaultValuePipe,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './providers/users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
@@ -23,9 +24,13 @@ import {
 } from '@nestjs/swagger';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { CreateManyUsersDto } from './dtos/create-many-users.dto';
+import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { AuthType } from 'src/auth/enums/auth-type.enum';
 
 @Controller('users')
 @ApiTags('Users')
+@UseGuards(AccessTokenGuard)
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -79,6 +84,8 @@ export class UsersController {
     description: 'The user data to be created',
   })
   @Post()
+  // @SetMetadata(AUTH_TYPE_KEY, AuthType.None)
+  @Auth(AuthType.None)
   public createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
