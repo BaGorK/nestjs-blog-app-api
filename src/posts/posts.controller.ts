@@ -34,6 +34,14 @@ export class PostsController {
   /**
    * Get all posts
    */
+  @ApiOperation({
+    summary: 'Get all posts',
+    description: 'This endpoint returns all posts',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Return all posts',
+  })
   @Get()
   public findAllPosts(@Query() postQuery: GetPostsDto) {
     console.log('postQuery', postQuery);
