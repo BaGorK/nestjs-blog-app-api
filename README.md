@@ -24,6 +24,11 @@
 
 ## Description
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/54e3ce9e-f867-4383-b361-4eb8ee6e1665" />
+</p>
+
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Project setup
