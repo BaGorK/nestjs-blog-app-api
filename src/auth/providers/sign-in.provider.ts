@@ -44,7 +44,7 @@ export class SignInProvider {
    */
   public async signIn(signInDto: SignInDto) {
     // check if the user still exists
-    const user = await this.usersService.FindOneUserByEmail(signInDto.email);
+    const user = await this.usersService.findOneUserByEmail(signInDto.email);
     // check if the password is correct
     let isEqual: boolean = false;
     try {
