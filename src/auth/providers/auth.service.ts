@@ -1,21 +1,21 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { UsersService } from 'src/users/providers/users.service';
+import { Injectable } from '@nestjs/common';
 import { SignInDto } from '../dtos/signin.dto';
 import { SignInProvider } from './sign-in.provider';
+import { RefreshTokensProvider } from './refresh-tokens.provider';
+import { RefreshTokenDto } from '../dtos/refresh-token.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     /**
-     * Injecting Users Service
-     */
-    @Inject(forwardRef(() => UsersService))
-    private readonly usersService: UsersService,
-
-    /**
      * Inject SignIn provider
      */
     private readonly signInProvider: SignInProvider,
+
+    /**
+     * Inject Refresh Tokens provider
+     */
+    private readonly refreshTokensProvider: RefreshTokensProvider,
   ) {}
 
   /**
@@ -23,6 +23,13 @@ export class AuthService {
    */
   public signIn(signInDto: SignInDto) {
     return this.signInProvider.signIn(signInDto);
+  }
+
+  /**
+   * Refresh tokens
+   */
+  public refreshTokens(refreshTokenDto: RefreshTokenDto) {
+    return this.refreshTokensProvider.refreshTokens(refreshTokenDto);
   }
 
   public isAuth() {
