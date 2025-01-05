@@ -12,6 +12,7 @@ import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Auth } from './decorators/auth.decorator';
 import { AuthType } from './enums/auth-type.enum';
 import { Response } from 'express';
+import { RefreshTokenDto } from './dtos/refresh-token.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -51,5 +52,19 @@ export class AuthController {
     });
 
     return res;
+  }
+
+  /**
+   * refresh tokens
+   */
+  @ApiOperation({
+    summary: 'Refresh Tokens',
+    description: 'Refresh tokens',
+  })
+  @HttpCode(HttpStatus.OK)
+  @Post('refresh-tokens')
+  @Auth(AuthType.None)
+  public async refreshTokens(@Body() refreshTokenDto: RefreshTokenDto) {
+    return this.authService.refreshTokens(refreshTokenDto);
   }
 }

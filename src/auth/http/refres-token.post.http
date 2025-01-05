@@ -1,0 +1,7 @@
+POST http://localhost:3000/auth/refresh-tokens HTTP/1.1
+Content-Type: application/json
+# Authorization: Bearer 
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIyLCJlbWFpbCI6ImpvaG41QGdtYWlsLmNvbSIsImlhdCI6MTczNjA3NTA0NiwiZXhwIjoxNzM4NjY3MDQ2LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.w-XCqlp7y3mS_2ZJik9XZ7m2rcED_m3uxWA3dnb88A0"
+}
