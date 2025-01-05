@@ -6,7 +6,7 @@ import { User } from 'src/users/user.entity';
 import { ActiveUserData } from '../interfaces/active-user-data.interface';
 
 @Injectable()
-export class GenerateTokenProvider {
+export class GenerateTokensProvider {
   constructor(
     /**
      * Injecting JwtService
