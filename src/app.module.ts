@@ -44,6 +44,9 @@ const ENV = process.env.NODE_ENV;
         database: configService.get('database.database_name'),
         autoLoadEntities: configService.get('database.autoLoadEntities'),
         synchronize: configService.get('database.synchronize'),
+        ssl: {
+          rejectUnauthorized: configService.get('database.ssl'), // Set to false for development; true for production
+        },
       }),
     }),
 
