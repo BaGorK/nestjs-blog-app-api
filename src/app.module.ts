@@ -17,7 +17,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
 import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
-import { DataResponseInterceptor } from './common/interceptors/data-reponse/data-response.interceptor';
+import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
 
 const ENV = process.env.NODE_ENV;
 
