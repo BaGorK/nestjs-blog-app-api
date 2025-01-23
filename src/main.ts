@@ -18,6 +18,8 @@ async function bootstrap() {
     }),
   );
 
+  const ENV = process.env.NODE_ENV || 'development';
+
   /**
    * swagger documentation
    */
@@ -25,11 +27,15 @@ async function bootstrap() {
     .setTitle('Learn NestJs By Building A Blog Api')
     // write me a blog api description
     .setDescription(
-      'Learn NestJs By Building A Blog Api: http://localhost:3000',
+      `Learn NestJs By Building A Blog Api: This is a simple blog api built with nestjs and postgresql.`,
     )
     .setTermsOfService('http://swagger.io/terms/')
     .setLicense('MIT License', 'http://swagger.io/license/')
-    .addServer('http://localhost:3000')
+    .addServer(
+      ENV === 'development'
+        ? 'http://localhost:3000'
+        : 'https://nestjs-blog-app-api.onrender.com',
+    )
     .setVersion('1.0')
     .build();
   /**
