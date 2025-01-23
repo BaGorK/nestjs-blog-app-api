@@ -36,6 +36,7 @@ async function bootstrap() {
         ? 'http://localhost:3000'
         : 'https://nestjs-blog-app-api.onrender.com',
     )
+    .addBearerAuth() // Add Bearer token support
     .setVersion('1.0')
     .build();
   /**
