@@ -118,23 +118,34 @@ Follow the steps below to get your NestJS blog API up and running locally.
 
 ### Available Scripts
 
-**start:dev** : Run the application in development mode with live reload (`NODE_ENV=development`).
-**start:prod** : Run the application in production mode.
-**build** : Build the project.
-**format** : Format the code using Prettier.
-**lint** : Lint the codebase using ESLint.
-**test** : Run unit tests using Jest.
-**test:watch** : Watch for file changes and rerun tests.
-**test:cov** : Generate code coverage for tests.
-**test:e2e** : Run end-to-end tests.
-**doc** : Generate and view API documentation with Compodoc.
+`start:dev` : Run the application in development mode with live reload (`NODE_ENV=development`).
+
+`start:prod` : Run the application in production mode.
+
+`build` : Build the project.
+
+`format` : Format the code using Prettier.
+
+`lint` : Lint the codebase using ESLint.
+
+`test` : Run unit tests using Jest.
+
+`test:watch` : Watch for file changes and rerun tests.
+
+`test:cov` : Generate code coverage for tests.
+
+`test:e2e` : Run end-to-end tests.
+
+`doc` : Generate and view API documentation with Compodoc.
 
 ### API Endpoints
 
 #### Authentication
 
 POST `/auth/sign-in`: Sign in with email and password.
+
 POST `/auth/refresh-tokens`: Refresh your JWT access and refresh tokens.
+
 POST `/auth/google-authentication`: Authenticate a user using a Google OAuth token.
 
 ### Swagger Documentation
