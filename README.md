@@ -23,71 +23,145 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/54e3ce9e-f867-4383-b361-4eb8ee6e1665" />
 </p>
 
-## Description
+# NestJS Blog API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a robust **NestJS Blog API** designed to handle user authentication, Google OAuth login, JWT-based access control, and various other features for a blog application. It uses PostgreSQL with TypeORM and integrates several essential technologies, including JWT for authentication and bcrypt for password hashing.
 
-## Project setup
+---
 
-```bash
-$ yarn install
+## Features
+
+- **User Authentication**: Sign-in and JWT token-based authentication.
+- **Google Authentication**: Supports Google login using OAuth2 tokens.
+- **JWT Tokens**: Secure access and refresh tokens for user sessions.
+- **Role-based Access**: Protect routes based on the user's authentication state.
+- **PostgreSQL Database**: All data is stored in a PostgreSQL database using TypeORM.
+- **Environment Configuration**: Dynamic configuration for different environments using `@nestjs/config`.
+
+---
+
+## Technologies
+
+- **NestJS**: A powerful Node.js framework for building efficient and scalable server-side applications.
+- **PostgreSQL**: A relational database management system.
+- **TypeORM**: An ORM that works with SQL-based databases and integrates seamlessly with NestJS.
+- **JWT**: JSON Web Tokens for securing endpoints and handling user sessions.
+- **BcryptJS**: For secure password hashing.
+- **Google OAuth**: For authenticating users via Google.
+- **Joi**: For validating environment variables.
+
+---
+
+## Getting Started
+
+Follow the steps below to get your NestJS blog API up and running locally.
+
+### Prerequisites
+
+- Node.js v18 or higher
+- PostgreSQL
+- NestJS CLI (Optional, but recommended)
+
+### Installation
+
+1. Clone this repository:
+
+   ```bash
+    git clone https://github.com/BaGorK/nestjs-blog-app-api.git
+    cd nestjs-blog-app-api
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+3. Compile and run the project
+
+   ```bash
+   # development
+   yarn run start
+
+   # watch mode
+   yarn run start:dev
+
+   # production mode
+   yarn run start:prod
+   ```
+
+4. Create a .env file in the root directory and set the required environment variables. You can reference the example below:
+
+   ```bash
+   NODE_ENV=development
+   DATABASE_PORT=5432
+   DATABASE_USER=your_db_user
+   DATABASE_PASSWORD=your_db_password
+   DATABASE_HOST=localhost
+   DATABASE_NAME=your_db_name
+   JWT_SECRET=your_jwt_secret
+   JWT_TOKEN_AUDIENCE=your_jwt_audience
+   JWT_TOKEN_ISSUER=your_jwt_issuer
+   JWT_ACCESS_TOKEN_TTL=3600
+   JWT_REFRESH_TOKEN_TTL=25920
+   GOOGLE_CLIENT_ID=your_google_client_id
+   GOOGLE_CLIENT_SECRET=your_google_client_secret
+   API_VERSION=v1
+   ```
+
+---
+
+### Available Scripts
+
+**start:dev** : Run the application in development mode with live reload (`NODE_ENV=development`).
+**start:prod** : Run the application in production mode.
+**build** : Build the project.
+**format** : Format the code using Prettier.
+**lint** : Lint the codebase using ESLint.
+**test** : Run unit tests using Jest.
+**test:watch** : Watch for file changes and rerun tests.
+**test:cov** : Generate code coverage for tests.
+**test:e2e** : Run end-to-end tests.
+**doc** : Generate and view API documentation with Compodoc.
+
+### API Endpoints
+
+#### Authentication
+
+POST `/auth/sign-in`: Sign in with email and password.
+POST `/auth/refresh-tokens`: Refresh your JWT access and refresh tokens.
+POST `/auth/google-authentication`: Authenticate a user using a Google OAuth token.
+
+### Swagger Documentation
+
+API documentation is available at `https://nestjs-blog-app-api.onrender.com/api`. You can interact with the API endpoints directly from the Swagger UI.
+
+### Database
+
+This project uses PostgreSQL as the database engine. The connection details are configured using environment variables. The application relies on TypeORM for database interaction, which supports migrations and synchronization.
+
+#### Database Configuration Example
+
+```typescript
+export default registerAs('database', () => ({
+  port: Number(process.env.DATABASE_PORT || 5432),
+  username: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  host: process.env.DATABASE_HOST || 'localhost',
+  database_name: process.env.DATABASE_NAME,
+  autoLoadEntities: Boolean(process.env.NODE_ENV === 'development'),
+  synchronize: Boolean(process.env.NODE_ENV === 'development'),
+  ssl: Boolean(process.env.NODE_ENV === 'production'),
+}));
 ```
 
-## Compile and run the project
+### Security
 
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- Passwords are securely hashed using bcryptjs.
+- Tokens are signed using JWT and include secure HTTP-only cookies.
+- All sensitive configuration, including the JWT secret and database credentials, should be stored securely in environment variables.
