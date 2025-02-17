@@ -3,7 +3,7 @@ import { GoogleAuthenticationService } from './providers/google-authentication.s
 import { GoogleTokenDto } from './dtos/google-token.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthType } from '../enums/auth-type.enum';
-import { Auth } from '../decorators/auth.decorator';
+import { Auth } from '../../common/decorators/auth.decorator';
 
 @Auth(AuthType.None)
 @Controller('auth/google-authentication')

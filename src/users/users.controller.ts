@@ -25,7 +25,7 @@ import {
 } from '@nestjs/swagger';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { CreateManyUsersDto } from './dtos/create-many-users.dto';
-import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Auth } from 'src/common/decorators/auth.decorator';
 import { AuthType } from 'src/auth/enums/auth-type.enum';
 
 @Controller('users')

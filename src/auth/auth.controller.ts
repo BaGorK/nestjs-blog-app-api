@@ -9,7 +9,7 @@ import {
 import { AuthService } from './providers/auth.service';
 import { SignInDto } from './dtos/signin.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { Auth } from './decorators/auth.decorator';
+import { Auth } from '../common/decorators/auth.decorator';
 import { AuthType } from './enums/auth-type.enum';
 import { Response } from 'express';
 import { RefreshTokenDto } from './dtos/refresh-token.dto';
