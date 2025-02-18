@@ -27,6 +27,7 @@ import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { AuthType } from 'src/auth/enums/auth-type.enum';
+import { CustomParseIntPipe } from 'src/common/pipes/parse-init/custom-parse-int.pipe';
 
 @Controller('users')
 @ApiTags('Users')
@@ -133,7 +134,7 @@ export class UsersController {
   })
   @Patch(':id')
   public updateUser(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', CustomParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.usersService.updateUser(id, updateUserDto);
